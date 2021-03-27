@@ -1,8 +1,21 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
 import App from './App';
-import reportWebVitals from './reportWebVitals';
+
+import firebase from "firebase/app";
+import "firebase/auth";
+
+
+var firebaseConfig = {
+  apiKey: "AIzaSyAtnfw_FH28tuwkiAKn3LGEnIWMqZ4SH7I",
+  authDomain: "poketrader-589dd.firebaseapp.com",
+  projectId: "poketrader-589dd",
+  storageBucket: "poketrader-589dd.appspot.com",
+  messagingSenderId: "193606706373",
+  appId: "1:193606706373:web:e1a01b3449fb89655cfcac"
+};
+
+firebase.initializeApp(firebaseConfig);
 
 ReactDOM.render(
   <React.StrictMode>
@@ -10,8 +23,3 @@ ReactDOM.render(
   </React.StrictMode>,
   document.getElementById('root')
 );
-
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
