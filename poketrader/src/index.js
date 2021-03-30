@@ -1,7 +1,9 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
 
+import { UserProvider } from './data/contexts/UserContext'
+import { LoaderProvider } from './data/contexts/LoaderContext'
 import firebase from "firebase/app";
 import "firebase/auth";
 
@@ -19,7 +21,11 @@ firebase.initializeApp(firebaseConfig);
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <LoaderProvider>
+      <UserProvider>
+        <App />
+      </UserProvider>
+    </LoaderProvider>
   </React.StrictMode>,
   document.getElementById('root')
 );

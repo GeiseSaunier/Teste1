@@ -60,6 +60,7 @@ export default function Login() {
                             margin="normal"
                             value={email}
                             onChange={text => setEmail(text.target.value)}
+                            autoComplete="off"
                         />
                         <TextField
                             label="Senha"
@@ -68,6 +69,7 @@ export default function Login() {
                             margin="normal"
                             value={senha}
                             onChange={text => setSenha(text.target.value)}
+                            autoComplete="new-password"
                         />
                         <Button
                             variant="contained"

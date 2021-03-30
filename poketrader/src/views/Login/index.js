@@ -1,25 +1,39 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import { Typography, TextField, Button } from '@material-ui/core'
-import { Redirect } from 'react-router-dom';
+import { withStyles } from '@material-ui/core/styles'
+import { Redirect, Link } from 'react-router-dom';
+import { LoaderContext } from '../../data/contexts/LoaderContext'
 import firebase from "firebase/app";
 import "firebase/auth";
+
+
+const RegisterButton = withStyles({
+    root: {
+        color: "#FFF",
+        backgroundColor: "#27a745",
+        '&:hover': {
+            backgroundColor: "#218838"
+        }
+    }
+})(Button);
 
 
 export default function Login() {
     const [email, setEmail] = useState("");
     const [senha, setSenha] = useState("");
-    const [isLogado, setIsLogado] = useState(false);
+    const { setIsLoading } = useContext(LoaderContext);
 
     const login = () => {
+        setIsLoading(true);
         firebase.auth().signInWithEmailAndPassword(email, senha)
             .then((user) => {
                 console.log(user);
-                setIsLogado(true);
             })
             .catch((error) => {
-                var errorCode = error.code;
+                setIsLoading(false);
                 var errorMessage = error.message;
-                console.log(errorMessage);
+                alert(errorMessage);
+
             });
     }
 
@@ -51,6 +65,7 @@ export default function Login() {
                             margin="normal"
                             value={senha}
                             onChange={text => setSenha(text.target.value)}
+                            autoComplete="new-password"
                         />
                         <Button
                             variant="contained"
@@ -62,14 +77,16 @@ export default function Login() {
                         >
                             Entrar
                         </Button>
-                        {/*  {
-                            (success) && <Redirect to="/vehicles" />
-                        } */}
-
-
-                        {
-                            isLogado ? (<h1>LOGADO</h1>) : null
-                        }
+                        <RegisterButton
+                            component={Link}
+                            to="/cadastro"
+                            variant="contained"
+                            fullWidth
+                            size="large"
+                            className="mt-4 mb-4"
+                        >
+                            Cadastrar
+                        </RegisterButton>
 
                     </div>
                 </div>
